@@ -1,0 +1,54 @@
+﻿@page
+@model CarApp.WebApp.Pages.Car.InsertModel
+
+<div class="row">
+    <div class="display-6 text-center">Insert a New Car</div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-8 offset-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="form-label">Brand</label>
+                    <select asp-for="Car.Brand" asp-items="Html.GetEnumSelectList<CarApp.WebApi.Models.Enums.Brand>()" class="form-select">
+                        <option value="">Select a brand</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Color</label>
+                    <select asp-for="Car.Color" asp-items="Html.GetEnumSelectList<CarApp.WebApi.Models.Enums.Color>()" class="form-select">
+                        <option value="">Select a color</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Year</label>
+                    <input asp-for="Car.Year" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Pictures</label>
+                    <input type="file" name="Files" class="form-control" multiple />
+                </div>
+            </div>
+
+            <div class="col-5 mt-2">
+                <label class="form-label">Features</label>
+                <select multiple class="form-select" name="featureIds">
+                    @if (Model.SelectFeaturesList is not null)
+                    {
+                        @foreach (var item in Model.SelectFeaturesList)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+
+                </select>
+            </div>
+
+            <div class="form-group mt-4">
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+
+        </form>
+    </div>
+</div>

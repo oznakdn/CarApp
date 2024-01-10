@@ -1,0 +1,46 @@
+﻿@page
+@model CarApp.WebApp.Pages.Car.IndexModel
+
+<div class="row mb-4">
+    <div class="col-10 offset-1 mt-3">
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Picture</th>
+                    <th>Id</th>
+                    <th>Brand</th>
+                    <th>Color</th>
+                    <th>Year</th>
+                    <th>
+                        <a asp-page="/Car/Insert" class="btn btn-primary text-dark"><i class="fa-solid fa-file-circle-plus"></i></a>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Cars)
+                {
+
+                    <tr>
+                        <td class="text-center">
+                            <img src="/images/@item.Pictures.First()" class="img-thumbnail img-fluid" width="50" id="imageShow" />
+                        </td>
+
+                        <td class="text-center">@item.Id</td>
+                        <td class="text-center">@item.Brand.ToString()</td>
+                        <td class="text-center">@item.Color.ToString()</td>
+                        <td class="text-center">@item.Year.ToString()</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a asp-page="/Car/Details" asp-route-id="@item.Id" class="btn btn-info text-dark"><i class="fa-solid fa-circle-info"></i></a>
+                                <a asp-page="/Car/Edit" asp-route-id="@item.Id" class="btn btn-warning text-dark"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a asp-page="/Car/Remove" asp-route-id="@item.Id" class="btn btn-danger text-dark"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

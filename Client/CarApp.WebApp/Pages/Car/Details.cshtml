@@ -1,0 +1,100 @@
+﻿@page
+@model CarApp.WebApp.Pages.Car.DetailsModel
+
+
+<div class="row">
+    <div class="d-inline-flex">
+        <a asp-page="/Car/Index" class="btn btn-warning"><i class="fa-solid fa-left-long"></i></a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="display-4 text-center">@Model.Car.Brand.ToString()</div>
+    <div class="display-6 text-center">@Model.Car.Year.ToString()</div>
+
+</div>
+
+
+<div class="row offset-2">
+
+    <div class="col-6 mt-5">
+        <div class="carousel slide" data-ride="carousel" data-interval="2000" data-pause="hover">
+            <ol class="carousel-indicators">
+                @for (int i = 0; i < Model.Car.Pictures.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        <li data-target="#myData" data-slide-to="@i" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#myData" data-slide-to="@i"></li>
+                    }
+                }
+            </ol>
+
+            <div class="carousel-inner col-4" role="listbox">
+                @for (int i = 0; i < Model.Car.Pictures.Count; i++)
+                {
+                    var file = Model.Car.Pictures.ToArray()[i];
+                    if (i == 0)
+                    {
+                        <div class="item active">
+                            <div class="carousel-content">
+                                <div style="margin: 0 auto">
+                                    <p>
+                                        <img alt="@file" src="/images/@file" class="img-fluid img-thumbnail" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item">
+                            <div class="carousel-content">
+                                <div style="margin: 0 auto;text-align:center;">
+                                    <p>
+                                        <img alt="@file" src="/images/@file" class="img-fluid img-thumbnail" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-2 mt-5">
+        @foreach (var item in Model.Car.Features)
+        {
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-text text-center">@item.FeatureName</p>
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel();
+    });
+</script>
