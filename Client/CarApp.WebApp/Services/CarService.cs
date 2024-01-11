@@ -35,4 +35,9 @@ public class CarService : ClientServiceBase
         string? url = EndPoints.Car.UpdateCar;
         await HttpClient.PutAsJsonAsync<WebApi.Models.Car>(url, car);
     }
+    public async Task DeleteCarAsync(string id)
+    {
+        string? url = $"{EndPoints.Car.GetCar}/{id}";
+        var result = await HttpClient.DeleteAsync(url);
+    }
 }

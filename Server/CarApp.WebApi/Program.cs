@@ -19,57 +19,52 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-#region Car controllers
 
-app.MapGet("/cars", async ([FromServices] ICarService carService) =>
+// Car api
+var carGroup = app.MapGroup("/cars");
+carGroup.MapGet("/", async ([FromServices] ICarService carService) =>
 {
-   var result =  await carService.GetCarsAsync();
+    var result = await carService.GetCarsAsync();
     return Results.Ok(result);
 });
-
-app.MapGet("/cars/{id}", async ([FromServices] ICarService carService, string id) =>
+carGroup.MapGet("/{id}", async ([FromServices] ICarService carService, string id) =>
 {
     var result = await carService.GetCarAsync(id);
     if (result is null) return Results.NotFound();
     return Results.Ok(result);
 });
 
-app.MapPost("/cars/create", async ([FromServices] CarRepository carRepository, [FromBody] Car car) =>
+carGroup.MapPost("/create", async ([FromServices] CarRepository carRepository, [FromBody] Car car) =>
 {
     await carRepository.InsertAsync(car);
     return Results.Ok();
 });
 
-app.MapPut("/cars/update", async ([FromServices] ICarService carService, [FromBody] Car car) =>
+carGroup.MapPut("/update", async ([FromServices] ICarService carService, [FromBody] Car car) =>
 {
     await carService.UpdateCarAsync(car);
     return Results.NoContent();
 });
 
+carGroup.MapDelete("/{id}", async ([FromServices] ICarService carService, string id) =>
+{
+    await carService.RemoveCarAsync(id);
+    return Results.NoContent();
+});
 
-
-#endregion
-
-#region Feature controllers
-
-app.MapGet("/features", async ([FromServices] FeatureRepository featureRepository) =>
+// Feature api
+var featureGroup = app.MapGroup("/features");
+featureGroup.MapGet("/", async ([FromServices] FeatureRepository featureRepository) =>
 {
     var result = await featureRepository.GetAllAsync();
     return Results.Ok(result);
-
 });
 
-app.MapPost("/features/create", async ([FromServices] FeatureRepository featureRepository, [FromBody] Feature feature) =>
+featureGroup.MapPost("/create", async ([FromServices] FeatureRepository featureRepository, [FromBody] Feature feature) =>
 {
     await featureRepository.InsertAsync(feature);
     return Results.Created("", feature);
 });
-
-
-#endregion
-
-
-
 
 
 app.Run();
