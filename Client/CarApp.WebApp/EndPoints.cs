@@ -10,6 +10,8 @@ public class Car
 {
     public string GetCar { get; set; }
     public string CreateCar { get; set; }
+    public string UpdateCar { get; set; }
+
 }
 
 public class Feature

@@ -55,7 +55,7 @@ public class InsertModel : PageModel
             {
                 Id = id,
                 FeatureName = Features.SingleOrDefault(x => x.Id == id)!.FeatureName
-        });
+            });
         }
 
         await _carService.InsertCarAsync(Car);

@@ -15,27 +15,32 @@ public abstract class MongoContext<T> : IMongoContext<T>
         Collection = database.GetCollection<T>(typeof(T).Name);
     }
 
-    public virtual async Task InsertAsync(T collection,CancellationToken cancellationToken = default)
+    public virtual async Task InsertAsync(T collection, CancellationToken cancellationToken = default)
     {
         await Collection.InsertOneAsync(collection, cancellationToken);
     }
 
-    public virtual async Task UpdateAsync(FilterDefinition<T>filter,T collection, CancellationToken cancellationToken = default)
+    public virtual async Task UpdateAsync(FilterDefinition<T> filter, T collection, CancellationToken cancellationToken = default)
     {
-        await Collection.ReplaceOneAsync(filter, collection, cancellationToken:cancellationToken);
+        await Collection.ReplaceOneAsync(filter, collection, cancellationToken: cancellationToken);
     }
 
-    public virtual async Task RemoveAsync(FilterDefinition<T> filter,CancellationToken cancellationToken = default)
+    public virtual async Task EditAsync(FilterDefinition<T> filter,UpdateDefinition<T> collection, CancellationToken cancellationToken = default)
     {
-        await Collection.DeleteOneAsync(filter,cancellationToken: cancellationToken);
+        await Collection.UpdateOneAsync(filter, collection, cancellationToken: cancellationToken);
     }
 
-    public virtual async Task<IEnumerable<T>>GetAllAsync(CancellationToken cancellationToken = default)
+    public virtual async Task RemoveAsync(FilterDefinition<T> filter, CancellationToken cancellationToken = default)
     {
-        return await Collection.Find(x=>true).ToListAsync();
+        await Collection.DeleteOneAsync(filter, cancellationToken: cancellationToken);
     }
 
-    public virtual async Task<T> GetAsync(FilterDefinition<T> filter,CancellationToken cancellationToken= default)
+    public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await Collection.Find(x => true).ToListAsync();
+    }
+
+    public virtual async Task<T> GetAsync(FilterDefinition<T> filter, CancellationToken cancellationToken = default)
     {
         return await Collection.Find<T>(filter).SingleOrDefaultAsync();
     }

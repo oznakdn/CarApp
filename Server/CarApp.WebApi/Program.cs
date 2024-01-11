@@ -40,6 +40,12 @@ app.MapPost("/cars/create", async ([FromServices] CarRepository carRepository, [
     return Results.Ok();
 });
 
+app.MapPut("/cars/update", async ([FromServices] ICarService carService, [FromBody] Car car) =>
+{
+    await carService.UpdateCarAsync(car);
+    return Results.NoContent();
+});
+
 
 
 #endregion

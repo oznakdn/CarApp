@@ -23,7 +23,11 @@
 
                     <tr>
                         <td class="text-center">
-                            <img src="/images/@item.Pictures.First()" class="img-thumbnail img-fluid" width="50" id="imageShow" />
+                            @if (item.Pictures != null || item.Pictures.Count > 0)
+                            {
+
+                                <img src="/images/@item.Pictures.FirstOrDefault()" class="img-thumbnail img-fluid" width="50" id="imageShow" />
+                            }
                         </td>
 
                         <td class="text-center">@item.Id</td>

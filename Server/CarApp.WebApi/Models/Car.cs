@@ -14,7 +14,7 @@ public class Car
     public Color Color { get; set; }
     public int Year { get; set; }
 
-    public ICollection<string>Pictures { get; set; } = new HashSet<string>();
-    public ICollection<Feature>Features { get; set; } = new HashSet<Feature>();
+    public List<string> Pictures { get; set; } = new();
+    public List<Feature> Features { get; set; } = new();
 
 }

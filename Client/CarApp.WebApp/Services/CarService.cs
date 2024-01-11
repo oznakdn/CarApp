@@ -29,4 +29,10 @@ public class CarService : ClientServiceBase
         string? url = EndPoints.Car.CreateCar;
         await HttpClient.PostAsJsonAsync<WebApi.Models.Car>(url, car);
     }
+
+    public async Task UpdateCarAsync(WebApi.Models.Car car)
+    {
+        string? url = EndPoints.Car.UpdateCar;
+        await HttpClient.PutAsJsonAsync<WebApi.Models.Car>(url, car);
+    }
 }
