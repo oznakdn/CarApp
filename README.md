@@ -1,0 +1,5 @@
+![Screenshot_1](https://github.com/oznakdn/CarApp/assets/79724084/927df542-c8c6-4d9d-afea-cc870c211e6d)
+![Screenshot_2](https://github.com/oznakdn/CarApp/assets/79724084/98b74ec7-c50d-4d0b-ab49-15816136517a)
+![Screenshot_3](https://github.com/oznakdn/CarApp/assets/79724084/94deb267-e991-40f7-a651-70c786b732aa)
+![Screenshot_4](https://github.com/oznakdn/CarApp/assets/79724084/328e1a03-cd96-4bda-ae37-ef2b72ba30fb)
+![Screenshot_5](https://github.com/oznakdn/CarApp/assets/79724084/05512f84-c23a-4f83-a042-319d5c87f9f6)
